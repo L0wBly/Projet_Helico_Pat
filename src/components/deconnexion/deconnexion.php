@@ -1,6 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header("Location: connexion.php");
+header("Location: /projetphp/projet_helico_pat/src/pages/homePage/homePage.php");
 exit;
 ?>

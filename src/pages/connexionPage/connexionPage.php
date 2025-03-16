@@ -1,5 +1,7 @@
 <?php
-require_once 'connexion.php';
+require_once '../../components/connexion/connexion.php';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,5 +19,15 @@ require_once 'connexion.php';
         <input type="password" name="password" id="password" required>
         <input type="submit" value="Connexion">
     </form>
+
+    <a href="/projetphp/projet_helico_pat/src/pages/homePage/homePage.php">Revenir à la Home Page</a>
+
+    <?php if(!empty($erreurs)): ?>
+        <ul>
+            <?php foreach($erreurs as $erreur): ?>
+                <li><?= $erreur ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </body>
 </html>

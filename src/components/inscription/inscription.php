@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $users = json_decode(file_get_contents("utilisateurs.json"), true) ?? [];
       $users[] = $user;
       file_put_contents("utilisateurs.json", json_encode($users));
-      header("Location: connexion.php");
+      header("Location: /projetphp/projet_helico_pat/src/pages/connexionPage/connexionPage.php");
       exit;
   } else {
       echo "Veuillez remplir tous les champs.";

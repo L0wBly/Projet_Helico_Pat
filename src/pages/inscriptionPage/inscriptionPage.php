@@ -1,5 +1,5 @@
 <?php
-require_once 'inscription.php';
+require_once '../../components/inscription/inscription.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,5 +17,6 @@ require_once 'inscription.php';
         <input type="password" name="password" id="password" required>
         <input type="submit" value="Inscription">
     </form>
+    <a href="/projetphp/projet_helico_pat/src/pages/homePage/homePage.php">Revenir à la Home Page</a>
 </body>
 </html>

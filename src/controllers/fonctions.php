@@ -76,3 +76,14 @@ function estConnecte() {
     }
     return false;
 }
+
+function recupererLesFichier($identifiantHasher){
+    $resultat = [];
+    $fichiers = scandir("../../uploads/$identifiantHasher");
+    foreach($fichiers as $fichier){
+        if($fichier != "." && $fichier != ".."){
+            $resultat[] = $fichier;
+        }
+    }
+    return $resultat;
+}

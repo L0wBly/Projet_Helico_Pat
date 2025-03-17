@@ -1,6 +1,7 @@
 <?php
+require_once '../../controllers/fonctions.php';
 session_start();
 session_destroy();
-header("Location: /projetphp/projet_helico_pat/src/pages/homePage/homePage.php");
-exit;
+header('Location: ' . BASE_URL . 'pages/homePage/homePage.php');
+exit();
 ?>

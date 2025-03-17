@@ -2,17 +2,17 @@
 require_once '../controllers/fonctions.php';
 session_start();
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newPseudo = $_POST["newPseudo"];
     $motDePasse = $_POST["password"];
     $resultat = modifierPseudo($newPseudo, $motDePasse);
 
     if ($resultat === "Pseudo modifié avec succès.") {
-        header('Location: /projetphp/projet_helico_pat/src/pages/dashboardPage/dashboardPage.php');
+        header('Location: ' . BASE_URL . 'pages/dashboardPage/dashboardPage.php');
         exit();
     } else {
-        header('Location: /projetphp/projet_helico_pat/src/pages/dashboardPage/dashboardPage.php?erreur=' . $resultat);
+        header('Location: ' . BASE_URL . 'pages/dashboardPage/dashboardPage.php?erreur=' . urlencode($resultat));
+        exit();
     }
 }
 

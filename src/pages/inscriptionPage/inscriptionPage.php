@@ -17,6 +17,6 @@ require_once '../../components/inscription/inscription.php';
         <input type="password" name="password" id="password" required>
         <input type="submit" value="Inscription">
     </form>
-    <a href="/projetphp/projet_helico_pat/src/pages/homePage/homePage.php">Revenir à la Home Page</a>
+    <a href="<?= BASE_URL ?>pages/homePage/homePage.php">Revenir à la Home Page</a>
 </body>
 </html>

@@ -11,13 +11,31 @@ function toggleChangePseudoForm() {
     }
 }
 
-function activateChangePseudoForm() {
+function toggleChangePasswordForm() {
+    const form = document.getElementById('changePasswordForm');
+    const changePasswordButton = document.getElementById('changePasswordButton');
+
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+        changePasswordButton.textContent = 'Annuler';
+    } else {
+        form.style.display = 'none';
+        changePasswordButton.textContent = 'Changer de mot de passe';
+    }
+}
+
+function activateChangePseudoOrPasswordForm() {
     const changePseudoButton = document.getElementById('changePseudoButton');
+    const changePasswordButton = document.getElementById('changePasswordButton');
 
     if (changePseudoButton) {
         changePseudoButton.addEventListener('click', toggleChangePseudoForm);
     }
+
+    if (changePasswordButton) {
+        changePasswordButton.addEventListener('click', toggleChangePasswordForm);
+    }
 }
 
-activateChangePseudoForm();
+activateChangePseudoOrPasswordForm();
 

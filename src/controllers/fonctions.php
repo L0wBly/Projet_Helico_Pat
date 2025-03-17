@@ -1,5 +1,6 @@
 <?php
 
+define('BASE_URL', str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', __DIR__ . '/../')));
 define('UTILISATEURS_FILE_PATH', __DIR__ . '/../users/utilisateurs.json');
 
 function estCeQueLadresseExisteDeja($adresse) {
@@ -64,7 +65,7 @@ function ajouterUtilisateur($utilisateur) {
 
 function obligationConnexion() {
     if(!estConnecte()) {
-        header('Location: /projetphp/projet_helico_pat/src/pages/homePage/homePage.php');
+        header('Location: ' . BASE_URL . '/homePage/homePage.php');
         exit();
     }
 }

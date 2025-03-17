@@ -1,8 +1,8 @@
 <?php
+require_once '../../controllers/fonctions.php';
 require_once '../../components/connexion/connexion.php';
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,11 +20,11 @@ require_once '../../components/connexion/connexion.php';
         <input type="submit" value="Connexion">
     </form>
 
-    <a href="/projetphp/projet_helico_pat/src/pages/homePage/homePage.php">Revenir à la Home Page</a>
+    <a href="<?= BASE_URL ?>pages/homePage/homePage.php">Revenir à la Home Page</a>
 
-    <?php if(!empty($erreurs)): ?>
+    <?php if (!empty($erreurs)): ?>
         <ul>
-            <?php foreach($erreurs as $erreur): ?>
+            <?php foreach ($erreurs as $erreur): ?>
                 <li><?= $erreur ?></li>
             <?php endforeach; ?>
         </ul>

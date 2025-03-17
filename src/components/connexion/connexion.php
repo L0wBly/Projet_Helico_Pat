@@ -1,6 +1,5 @@
 <?php
 require_once '../../controllers/fonctions.php';
-
 $erreurs = [];
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $identifiant = filter_input(INPUT_POST, "pseudo");

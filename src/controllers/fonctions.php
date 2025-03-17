@@ -1,10 +1,12 @@
 <?php
 
+define('UTILISATEURS_FILE_PATH', __DIR__ . '/../users/utilisateurs.json');
+
 function estCeQueLadresseExisteDeja($adresse) {
     $utilisateurs = recupererLesUtilisateurs();
 
-    foreach($utilisateurs as $utilisateur) {
-        if($utilisateur["login"] == $adresse) {
+    foreach ($utilisateurs as $utilisateur) {
+        if ($utilisateur["login"] == $adresse) {
             return true;
         }
     }
@@ -12,21 +14,35 @@ function estCeQueLadresseExisteDeja($adresse) {
 }
 
 function recupererLesUtilisateurs() {
-    $directory = "../inscriptionPage/";
-    $filePath = $directory . "utilisateurs.json";
+    $filePath = UTILISATEURS_FILE_PATH;
+    $directory = dirname($filePath);
+
+    if (!is_dir($directory)) {
+        mkdir($directory, 0777, true);
+    }
 
     if (!file_exists($filePath)) {
-        file_put_contents($filePath, "[]");
+        if (file_put_contents($filePath, "[]") === false) {
+            die("Erreur : Impossible de créer le fichier $filePath");
+        }
     }
 
     $utilisateursTxt = file_get_contents($filePath);
     $utilisateurs = json_decode($utilisateursTxt, true);
+
+    if (!is_array($utilisateurs)) {
+        $utilisateurs = [];
+    }
+
     return $utilisateurs;
 }
 
 function sauvegarderLesUtilisateurs($utilisateurs) {
-    $utilisateursTxt = json_encode($utilisateurs);
-    file_put_contents("utilisateurs.json", $utilisateursTxt);
+    $filePath = UTILISATEURS_FILE_PATH;
+    $utilisateursTxt = json_encode($utilisateurs, JSON_PRETTY_PRINT);
+    if (file_put_contents($filePath, $utilisateursTxt) === false) {
+        die("Erreur : Impossible de sauvegarder les utilisateurs dans $filePath");
+    }
 }
 
 function recupererUtilisateurParAdresse($adresse) {

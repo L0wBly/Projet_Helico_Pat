@@ -3,8 +3,7 @@
 require_once '../../controllers/fonctions.php';
 
     
-    $identifiant = $_SESSION['identifiant'];
-    $identifiantHasher = hash('crc32',$identifiant);
+    $identifiantHasher = hashIdentifiant();
     $erreurs = [];
     $messageEnvoi = '';
 

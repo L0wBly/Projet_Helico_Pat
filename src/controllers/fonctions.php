@@ -79,11 +79,18 @@ function estConnecte() {
 
 function recupererLesFichier($identifiantHasher){
     $resultat = [];
-    $fichiers = scandir("../../uploads/$identifiantHasher");
-    foreach($fichiers as $fichier){
-        if($fichier != "." && $fichier != ".."){
-            $resultat[] = $fichier;
+    if(is_dir("../../uploads/$identifiantHasher/")){
+        $fichiers = scandir("../../uploads/$identifiantHasher");
+        foreach($fichiers as $fichier){
+            if($fichier != "." && $fichier != ".."){
+                $resultat[] = $fichier;
+            }
         }
     }
     return $resultat;
+}
+
+function hashIdentifiant(){
+    $identifiantHasher = hash('crc32',$_SESSION['identifiant']);
+    return $identifiantHasher;
 }

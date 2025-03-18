@@ -1,8 +1,7 @@
 <?php 
 session_start();
-obligationConnexion();
-
 require_once '../../components/upload/upload.php';
+obligationConnexion();
 
 $fichiers = recupererLesFichier($identifiantHasher)
 
@@ -39,7 +38,11 @@ $fichiers = recupererLesFichier($identifiantHasher)
     <h2>Vos fichiers</h2>
 
     <?php foreach($fichiers as $fichier): ?>
-        <a href="" download="<?= $fichier ?>"><?= $fichier ?></a>
+        <form action="../../components/download/download.php" method="GET">
+            <label for="file"><?= $fichier ?></label>
+            <input type="hidden" name="file" value="<?= $fichier ?>">
+            <button type="submit">Télécharger</button>
+        </form>
     <?php endforeach; ?>
 
 </body>

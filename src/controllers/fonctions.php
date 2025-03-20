@@ -94,3 +94,12 @@ function hashIdentifiant(){
     $identifiantHasher = hash('crc32',$_SESSION['identifiant']);
     return $identifiantHasher;
 }
+
+function recupererLesCommentaires(){
+    $commentsFile = '../../components/commentaire/comments.json';
+    $comments = [];
+    if(file_exists($commentsFile)){
+        $comments = json_decode(file_get_contents($commentsFile), true);
+    }
+    return $comments;
+}

@@ -1,9 +1,11 @@
 <?php 
 session_start();
 require_once '../../components/upload/upload.php';
+require_once '../../components/commentaire/commentaire.php';
 obligationConnexion();
 
-$fichiers = recupererLesFichier($identifiantHasher)
+$fichiers = recupererLesFichier($identifiantHasher);
+$comments = recupererLesCommentaires();
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +45,27 @@ $fichiers = recupererLesFichier($identifiantHasher)
             <input type="hidden" name="file" value="<?= $fichier ?>">
             <button type="submit">Télécharger</button>
         </form>
-    <?php endforeach; ?>
+        <form method="POST">
+            <div>
+                <?php if(isset ($err_commentaire)){ echo '<div>'.$err_commentaire.'</div>';}?>
+                <label for="commentaire">Commenter :</label>
+                <textarea name="commentaire" type="text" placeholder="Votre commentaire"></textarea>
+                <input type="hidden" name="fichier" value="<?= $fichier ?>">
+            </div>
+            <div>
+                <button type="submit" name="poster">Envoyer</button>
+            </div>
+        </form>
+        <?php foreach($comments as $comment): ?>
+            <?php if($comment['name_fichier'] == $fichier): ?>
+                <div>
+                    <p><?= $comment['commentaire'] ?></p>
+                    <p><?= $comment['date_creation'] ?></p>
+                    <p><?= $comment['id_utilisateur'] ?></p>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php endforeach; ?>
 
 </body>
 </html>

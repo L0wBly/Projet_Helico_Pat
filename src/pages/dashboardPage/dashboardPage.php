@@ -48,6 +48,8 @@ $messageErreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
       <button type="submit">Confirmer</button>
   </form>
 
+  <a href="<?= BASE_URL ?>pages/partagepage/partagepage.php">Partager un fichier</a>
+
   <?php if (!empty($messageErreur)): ?>
         <p style="color: red;"><?= $messageErreur ?></p>
   <?php endif; ?>

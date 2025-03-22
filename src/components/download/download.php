@@ -7,9 +7,12 @@ $identifiantHasher = hashIdentifiant();
 
 if (isset($_GET['file'])) {
     $file = basename($_GET['file']); // Sécurisation du nom de fichier
-    var_dump($file);
-    $filepath = '../../uploads/' . $identifiantHasher . '/' . $file;
-    var_dump($filepath);
+    $filepath = '';;
+    if (isset($_GET['public'])) {
+        $filepath = '../../uploads/public/' . $file;
+    } else {
+        $filepath = '../../uploads/' . $identifiantHasher . '/' . $file;
+    }
 
     if (file_exists($filepath)) {
         // En-têtes pour forcer le téléchargement

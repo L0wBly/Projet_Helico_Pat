@@ -1,15 +1,26 @@
 <?php 
 session_start();
 require_once '../../controllers/fonctions.php';
+require_once '../../components/partage/partage.php';
 obligationConnexion();
 
 $identifiantHasher = hashIdentifiant();
 
 if (isset($_GET['file'])) {
     $file = basename($_GET['file']); // Sécurisation du nom de fichier
-    $filepath = '';;
+    $filepath = '';
     if (isset($_GET['public'])) {
         $filepath = '../../uploads/public/' . $file;
+    } else if (isset($_GET['reserved'])) {
+        $reserved_data = file_get_contents('../../components/reservedFile/reservedFiles.json');
+        $data_json = json_decode($reserved_data, true);
+        foreach ($data_json as $key => $value) {
+            if ($value['lien'] == BASE_URL . 'components/download/download.php?file=' . urlencode($file) . '&reserved') {
+                if ($value['destinataire'] == $_SESSION['identifiant']) {
+                    $filepath = '../../uploads/reserved/' . $file;
+                }
+            }
+        }
     } else {
         $filepath = '../../uploads/' . $identifiantHasher . '/' . $file;
     }

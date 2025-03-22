@@ -65,7 +65,7 @@ function ajouterUtilisateur($utilisateur) {
 
 function obligationConnexion() {
     if(!estConnecte()) {
-        header('Location: ' . BASE_URL . '/homePage/homePage.php');
+        header('Location: ' . BASE_URL . 'pages/homePage/homePage.php');
         exit();
     }
 }

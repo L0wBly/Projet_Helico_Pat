@@ -7,7 +7,7 @@ require_once '../../controllers/fonctions.php';
     $erreurs = [];
     $messageEnvoi = '';
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["upload"])){
         $targetDir = "../../uploads/$identifiantHasher/";
         $targetFile = $targetDir . basename($_FILES["upload"]["name"]);
         $uploadOk = 1;

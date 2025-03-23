@@ -7,7 +7,6 @@ $sharedlink = '';
 $fichiers = recupererLesFichier($identifiantHasher);
 $public = '';
 $erreurshare = '';
-var_dump(BASE_URL);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fichier_public']) && isset($_POST['access'])) {
     $fichier = basename($_POST['fichier_public']);
@@ -30,10 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fichier_public']) && 
             copy($privatepath, $reservedpath);
             $destinataire = $_POST['destinataire'];
             $utilisateur = recupererUtilisateurParAdresse($destinataire);
-            var_dump($utilisateur);
             if ($utilisateur) {
                 $sharedlink = BASE_URL . 'components/download/download.php?file=' . urlencode($fichier) . '&reserved';
-                var_dump($sharedlink);
                 $reservedfile = array(
                     'destinataire' => $destinataire,
                     'lien' => $sharedlink  

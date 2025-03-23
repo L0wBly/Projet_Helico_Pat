@@ -25,7 +25,7 @@ $messageErreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
 
   <form id="changePseudoForm" method="POST" action="<?= BASE_URL ?>controllers/changePseudo.php" style="display: none;">
       <label for="newPseudo">Nouveau pseudo :</label>
-      <input type="text" id="newPseudo" name="newPseudo" required>
+      <input type="mail" id="newPseudo" name="newPseudo" required>
       <br>
       <label for="password">Mot de passe :</label>
       <input type="password" id="password" name="password" required>

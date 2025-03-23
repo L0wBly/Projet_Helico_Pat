@@ -3,8 +3,6 @@
 define('BASE_URL', rtrim($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', realpath(__DIR__ . '/..'))), '/') . '/');
 define('UTILISATEURS_FILE_PATH', __DIR__ . '/../users/utilisateurs.json');
 
-var_dump(BASE_URL);
-
 function estCeQueLadresseExisteDeja($adresse) {
     $utilisateurs = recupererLesUtilisateurs();
 

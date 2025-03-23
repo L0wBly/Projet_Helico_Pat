@@ -42,7 +42,11 @@ $comments = recupererLesCommentaires();
     <?php if ($erreurshare != ''): ?>
         <p><?= $erreurshare ?></p>
     <?php endif; ?>
-
+    
+    <?php if(isset($_SESSION['messageSuppression'])): ?>
+        <p><?= $_SESSION['messageSuppression'] ?></p>
+        <?php unset($_SESSION['messageSuppression']); ?>
+    <?php endif; ?>
 
     <?php if ($messageEnvoi != ''): ?>
         <p><?= $messageEnvoi ?></p>
@@ -57,6 +61,10 @@ $comments = recupererLesCommentaires();
             <label for="file"><?= $fichier ?></label>
             <input type="hidden" name="file" value="<?= $fichier ?>">
             <button type="submit">Télécharger</button>
+        </form>
+        <form method="POST" action="../../components/suppression/suppression.php">
+            <input type="hidden" name="fichieraSupprimer" value="<?= $fichier ?>">
+            <button type="submit" name="supprimer">Supprimer</button>
         </form>
         <ul>
             <li>
@@ -73,6 +81,7 @@ $comments = recupererLesCommentaires();
                 </form>
             </li>
         </ul>
+
             <form method="POST">
                 <div>
                     <?php if (isset($err_commentaire)): ?>

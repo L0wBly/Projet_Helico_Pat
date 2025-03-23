@@ -32,11 +32,15 @@ $comments = recupererLesCommentaires();
     </form>
 
     <?php if ($sharedlink != '' && $public == 'public'): ?>
-        <a href="<?= $sharedlink ?>">Lien public</a>
+        <p>Lien public :<a href="<?= $sharedlink ?>"><?= $sharedlink ?></a></p>
     <?php endif; ?>
 
     <?php if ($sharedlink != '' && $public == 'reserved'): ?>
-        <a href="<?= $sharedlink ?>">Lien privé</a>
+        <p>Lien privé :<a href="<?= $sharedlink ?>"><?= $sharedlink ?></a></p>
+    <?php endif; ?>
+
+    <?php if ($erreurshare != ''): ?>
+        <p><?= $erreurshare ?></p>
     <?php endif; ?>
 
 
@@ -45,7 +49,7 @@ $comments = recupererLesCommentaires();
     <?php endif; ?> 
 
     <a href="<?= BASE_URL ?>pages/dashboardPage/dashboardPage.php">Retourner au dashboard</a>
-
+    
     <h2>Vos fichiers</h2>
 
     <?php foreach ($fichiers as $fichier): ?>
@@ -83,14 +87,14 @@ $comments = recupererLesCommentaires();
                 </div>
             </form> 
             <?php foreach ($comments as $comment): ?>
-            <?php if ($comment['name_fichier'] == $fichier): ?>
-                <div>
-                    <p><?= $comment['commentaire'] ?></p>
-                    <p><?= $comment['date_creation'] ?></p>
-                    <p><?= $comment['id_utilisateur'] ?></p>
-                </div>
-            <?php endif; ?>
-        <?php endforeach; ?>
+                <?php if ($comment['name_fichier'] == $fichier): ?>
+                    <div>
+                        <p><?= $comment['commentaire'] ?></p>
+                        <p><?= $comment['date_creation'] ?></p>
+                        <p><?= $comment['id_utilisateur'] ?></p>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
     <?php endforeach; ?>
 </body>
 </html>

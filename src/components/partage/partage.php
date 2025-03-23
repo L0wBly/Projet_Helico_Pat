@@ -4,8 +4,10 @@ obligationConnexion();
 
 $identifiantHasher = hashIdentifiant();
 $sharedlink = '';
-$fichiers = recupererLesFichier($identifiantHasher); // $resultat = [$fichier1, $fichier2, ...]
+$fichiers = recupererLesFichier($identifiantHasher);
 $public = '';
+$erreurshare = '';
+var_dump(BASE_URL);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fichier_public']) && isset($_POST['access'])) {
     $fichier = basename($_POST['fichier_public']);
@@ -16,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fichier_public']) && 
 
     if (file_exists($privatepath)) {
         if ($public === 'public') {
+            if (!is_dir('../../uploads/public')) {
+                mkdir('../../uploads/public');
+            }
             copy($privatepath, $publicpath);
             $sharedlink = BASE_URL . 'components/download/download.php?file=' . urlencode($fichier) . '&public';
         } else if ($public === 'reserved') {
@@ -25,8 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fichier_public']) && 
             copy($privatepath, $reservedpath);
             $destinataire = $_POST['destinataire'];
             $utilisateur = recupererUtilisateurParAdresse($destinataire);
+            var_dump($utilisateur);
             if ($utilisateur) {
                 $sharedlink = BASE_URL . 'components/download/download.php?file=' . urlencode($fichier) . '&reserved';
+                var_dump($sharedlink);
                 $reservedfile = array(
                     'destinataire' => $destinataire,
                     'lien' => $sharedlink  
@@ -43,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fichier_public']) && 
                 $reservedFiles[] = $reservedfile;
 
                 file_put_contents($reservedFileDir . '/reservedFiles.json', json_encode($reservedFiles));
+            } else {
+                $erreurshare = 'Utilisateur inexistant';
             }
         }
     }

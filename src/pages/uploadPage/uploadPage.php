@@ -32,20 +32,28 @@ $comments = recupererLesCommentaires();
     </form>
 
     <?php if ($sharedlink != '' && $public == 'public'): ?>
-        <a href="<?= $sharedlink ?>">Lien public</a>
+        <p>Lien public :<a href="<?= $sharedlink ?>"><?= $sharedlink ?></a></p>
     <?php endif; ?>
 
     <?php if ($sharedlink != '' && $public == 'reserved'): ?>
-        <a href="<?= $sharedlink ?>">Lien privé</a>
+        <p>Lien privé :<a href="<?= $sharedlink ?>"><?= $sharedlink ?></a></p>
     <?php endif; ?>
 
+    <?php if ($erreurshare != ''): ?>
+        <p><?= $erreurshare ?></p>
+    <?php endif; ?>
+    
+    <?php if(isset($_SESSION['messageSuppression'])): ?>
+        <p><?= $_SESSION['messageSuppression'] ?></p>
+        <?php unset($_SESSION['messageSuppression']); ?>
+    <?php endif; ?>
 
     <?php if ($messageEnvoi != ''): ?>
         <p><?= $messageEnvoi ?></p>
     <?php endif; ?> 
 
     <a href="<?= BASE_URL ?>pages/dashboardPage/dashboardPage.php">Retourner au dashboard</a>
-
+    
     <h2>Vos fichiers</h2>
 
     <?php foreach ($fichiers as $fichier): ?>
@@ -53,6 +61,10 @@ $comments = recupererLesCommentaires();
             <label for="file"><?= $fichier ?></label>
             <input type="hidden" name="file" value="<?= $fichier ?>">
             <button type="submit">Télécharger</button>
+        </form>
+        <form method="POST" action="../../components/suppression/suppression.php">
+            <input type="hidden" name="fichieraSupprimer" value="<?= $fichier ?>">
+            <button type="submit" name="supprimer">Supprimer</button>
         </form>
         <ul>
             <li>
@@ -69,6 +81,7 @@ $comments = recupererLesCommentaires();
                 </form>
             </li>
         </ul>
+
             <form method="POST">
                 <div>
                     <?php if (isset($err_commentaire)): ?>
@@ -83,14 +96,14 @@ $comments = recupererLesCommentaires();
                 </div>
             </form> 
             <?php foreach ($comments as $comment): ?>
-            <?php if ($comment['name_fichier'] == $fichier): ?>
-                <div>
-                    <p><?= $comment['commentaire'] ?></p>
-                    <p><?= $comment['date_creation'] ?></p>
-                    <p><?= $comment['id_utilisateur'] ?></p>
-                </div>
-            <?php endif; ?>
-        <?php endforeach; ?>
+                <?php if ($comment['name_fichier'] == $fichier): ?>
+                    <div>
+                        <p><?= $comment['commentaire'] ?></p>
+                        <p><?= $comment['date_creation'] ?></p>
+                        <p><?= $comment['id_utilisateur'] ?></p>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
     <?php endforeach; ?>
 </body>
 </html>

@@ -21,7 +21,7 @@ require_once '../../controllers/fonctions.php';
                 <p class="text-purple-500">Veuillez vous inscrire ou vous connecter pour continuer.</p>
             </div>
         </div>
-        <script src="https://cdn.tailwindcss.com"></script>
     </div>
+    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

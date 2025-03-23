@@ -42,7 +42,9 @@ $messageErreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
           
         </form>
 
+
         <button id="changePasswordButton" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1rem] px-5 py-2.5 text-center me-2 mb-2">Changer de mot de passe</button>
+
 
         <form id="changePasswordForm" method="POST" action="<?= BASE_URL ?>controllers/changePassword.php" style="display: none;" class="flex flex-col justify-center items-center w-[400px] h-[35vh] rounded-[15px] m-[2rem] pt-[4rem] pb-[1rem] justify-between shadow-lg shadow-cyan-500/50 bg-sky-200">
           <div class="flex flex-col items-center gap-[1.5rem]">

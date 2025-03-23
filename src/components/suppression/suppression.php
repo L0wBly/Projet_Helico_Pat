@@ -1,38 +1,30 @@
 <?php
-$uploadDir = 'uploads/';
+session_start();
+require_once '../../controllers/fonctions.php';
+obligationConnexion();
+$identifiantHasher = hashIdentifiant();
 
 
-if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0777, true);
-}
 
+if (isset($_POST['fichieraSupprimer'])) {
+    $fichier = basename($_POST['fichieraSupprimer']);
+    $uploadDir = '../../uploads/' . $identifiantHasher . '/';
+    $filePath = $uploadDir . $fichier;
+    $publicpath = '../../uploads/public/' . $fichier;
+    $reservedpath = '../../uploads/reserved/' . $fichier;
 
-if (isset($_FILES['file'])) {
-    $fileName = basename($_FILES['file']['name']);
-    $filePath = $uploadDir . $fileName;
-
-    if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
-        echo "✅ Le fichier a été téléchargé avec succès : <a href='$filePath' download>$fileName</a><br>";
-    } else {
-        echo "❌ Erreur lors du téléchargement du fichier.<br>";
-    }
-}
-
-
-if (isset($_POST['delete'])) {
-    $fileToDelete = $uploadDir . $_POST['delete'];
-
-    if (file_exists($fileToDelete)) {
-        if (unlink($fileToDelete)) {
-            echo "✅ Fichier supprimé : " . htmlspecialchars($_POST['delete']);
-        } else {
-            echo "❌ Erreur lors de la suppression.";
+    if (file_exists($filePath)) {
+            unlink($filePath);
+            $_SESSION['messageSuppression']= "✅ Le fichier a bien été supprimé.<br>";
+            if (file_exists($publicpath)) {
+                unlink($publicpath);
+            }
+            if (file_exists($reservedpath)) {
+                unlink($reservedpath);
+            }
+            header('Location: ' . BASE_URL . 'pages/uploadpage/uploadpage.php');
         }
     } else {
-        echo "⚠ Le fichier n'existe pas.";
-    }
+        $_SESSION['messageSuppression']= "❌ Le fichier n'existe pas.<br>";
 }
-
-
-$files = array_diff(scandir($uploadDir), array('.', '..'));
 ?>

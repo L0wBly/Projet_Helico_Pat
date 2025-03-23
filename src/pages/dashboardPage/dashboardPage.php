@@ -18,6 +18,7 @@ $messageErreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
 
   <p>Vous êtes connecté en tant que <?= $_SESSION["identifiant"] ?></p>
 
+  <a href="<?= BASE_URL ?>pages/uploadPage/uploadPage.php">Envoyer un fichier</a>
   <a href="<?= BASE_URL ?>components/deconnexion/deconnexion.php">Se déconnecter</a>
 
   <button id="changePseudoButton">Changer de pseudo</button>
@@ -50,7 +51,7 @@ $messageErreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
   <?php if (!empty($messageErreur)): ?>
         <p style="color: red;"><?= $messageErreur ?></p>
   <?php endif; ?>
-
+  
   <script src="<?= BASE_URL ?>pages/dashboardPage/dashboard.js"></script>
 </body>
 </html>

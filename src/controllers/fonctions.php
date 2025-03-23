@@ -65,7 +65,7 @@ function ajouterUtilisateur($utilisateur) {
 
 function obligationConnexion() {
     if(!estConnecte()) {
-        header('Location: ' . BASE_URL . '/homePage/homePage.php');
+        header('Location: ' . BASE_URL . 'pages/homePage/homePage.php');
         exit();
     }
 }
@@ -75,4 +75,31 @@ function estConnecte() {
         return true;
     }
     return false;
+}
+
+function recupererLesFichier($identifiantHasher){
+    $resultat = [];
+    if(is_dir("../../uploads/$identifiantHasher/")){
+        $fichiers = scandir("../../uploads/$identifiantHasher");
+        foreach($fichiers as $fichier){
+            if($fichier != "." && $fichier != ".."){
+                $resultat[] = $fichier;
+            }
+        }
+    }
+    return $resultat;
+}
+
+function hashIdentifiant(){
+    $identifiantHasher = hash('crc32',$_SESSION['identifiant']);
+    return $identifiantHasher;
+}
+
+function recupererLesCommentaires(){
+    $commentsFile = '../../components/commentaire/comments.json';
+    $comments = [];
+    if(file_exists($commentsFile)){
+        $comments = json_decode(file_get_contents($commentsFile), true);
+    }
+    return $comments;
 }

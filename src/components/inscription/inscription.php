@@ -2,15 +2,13 @@
 require_once '../../controllers/fonctions.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pseudo = filter_input(INPUT_POST, "pseudo", FILTER_SANITIZE_STRING);
+    $pseudo = filter_input(INPUT_POST, "pseudo", FILTER_VALIDATE_EMAIL);
     $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 
     if ($pseudo && $password) {
         $filePath = UTILISATEURS_FILE_PATH;
-        $user = ["pseudo" => $pseudo, "password" => password_hash($password, PASSWORD_DEFAULT)];
-        $users = json_decode(file_get_contents($filePath), true) ?? [];
-        $users[] = $user;
-        file_put_contents($filePath, json_encode($users));
+        $utilisateurs = ["pseudo" => $pseudo, "password" => password_hash($password, PASSWORD_DEFAULT)];
+        ajouterUtilisateur($utilisateurs);
         header('Location: ' . BASE_URL . 'pages/connexionPage/connexionPage.php');
         exit();
     } else {

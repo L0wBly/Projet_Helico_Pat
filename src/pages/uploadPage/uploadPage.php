@@ -51,10 +51,12 @@ $comments = recupererLesCommentaires();
         <h2 class="text-[4rem] text-purple-500 pt-[3rem]">Vos fichiers</h2>
 
         <?php foreach ($fichiers as $fichier): ?>
-            <form action="../../components/download/download.php" method="GET" class="bg-sky-500">
+            <form action="../../components/download/download.php" method="GET" class="bg-sky-500 flex items-center gap-[10px] rounded-[15px] px-5 py-2.5">
                 <label for="file"><?= $fichier ?></label>
                 <input type="hidden" name="file" value="<?= $fichier ?>">
-                <button type="submit">Télécharger</button>
+                <div class="flex justify-center">
+                    <button type="submit" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1rem] px-3 py-1.5 text-center ">Télécharger</button>
+                </div>
             </form>
             <form action="../../components/suppression/suppression.php" method="POST">
                 <input type="hidden" name="fichieraSupprimer" value="<?= $fichier ?>">

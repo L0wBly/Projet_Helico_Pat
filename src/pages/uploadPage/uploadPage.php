@@ -55,12 +55,12 @@ $comments = recupererLesCommentaires();
                 <label for="file"><?= $fichier ?></label>
                 <input type="hidden" name="file" value="<?= $fichier ?>">
                 <div class="flex justify-center">
-                    <button type="submit" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1rem] px-3 py-1.5 text-center ">Télécharger</button>
+                    <button type="submit" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1rem] px-3 py-1.5 text-center">Télécharger</button>
                 </div>
             </form>
             <form action="../../components/suppression/suppression.php" method="POST">
                 <input type="hidden" name="fichieraSupprimer" value="<?= $fichier ?>">
-                <button type="submit">Supprimer</button>
+                <button type="submit" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1rem] px-3 py-1.5 text-center m-[1rem]">Supprimer</button>
             </form>
             <ul>
                 <li>

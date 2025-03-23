@@ -15,11 +15,11 @@ require_once '../../components/inscription/inscription.php';
             <div class="flex flex-col gap-[1.5rem]">
                 <div>
                     <label for="pseudo">Pseudo</label>
-                    <input type="mail" name="pseudo" id="pseudo" required class="rounded-[15px]">
+                    <input type="mail" name="pseudo" id="pseudo" required class="rounded-[15px] pr-[5px] pl-[5px]">
                 </div>
                 <div>
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" required class="rounded-[15px]">
+                    <input type="password" name="password" id="password" required class="rounded-[15px] pr-[5px] pl-[5px]">
                 </div>
             </div>
                 <input type="submit" value="Inscription" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1.5rem] px-5 py-2.5 text-center me-2 mb-2">

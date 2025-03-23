@@ -9,7 +9,6 @@ $identifiantHasher = hashIdentifiant();
 if (isset($_GET['file'])) {
     $file = basename($_GET['file']); // Sécurisation du nom de fichier
     $filepath = '';
-    
     if (isset($_GET['public'])) {
         $filepath = '../../uploads/public/' . $file;
     } else if (isset($_GET['reserved'])) {

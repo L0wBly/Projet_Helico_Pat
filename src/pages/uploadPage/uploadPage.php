@@ -56,6 +56,10 @@ $comments = recupererLesCommentaires();
                 <input type="hidden" name="file" value="<?= $fichier ?>">
                 <button type="submit">Télécharger</button>
             </form>
+            <form action="../../components/suppression/suppression.php" method="POST">
+                <input type="hidden" name="fichieraSupprimer" value="<?= $fichier ?>">
+                <button type="submit">Supprimer</button>
+            </form>
             <ul>
                 <li>
                     <form method="POST" class="flex flex-col justify-center items-center w-[400px] h-[35vh] rounded-[15px] m-[2rem] pt-[4rem] pb-[1rem] justify-between shadow-lg shadow-cyan-500/50 bg-sky-200">

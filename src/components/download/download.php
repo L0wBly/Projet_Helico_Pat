@@ -26,12 +26,12 @@ if (isset($_GET['file'])) {
     }
 
     if (file_exists($filepath)) {
-        // Incrémenter le compteur de téléchargements
-        $counterFile = '../../components/download/download_counts.json';
+        $counterDir = '../../components/download/';
+        $counterFile = $counterDir . 'counter.json';
         $downloadCounts = file_exists($counterFile) ? json_decode(file_get_contents($counterFile), true) : [];
 
-        if (!is_dir($counterFile)) {
-            mkdir($counterFile, 0777, true);
+        if (!is_dir($counterDir)) {
+            mkdir($counterDir, 0777, true);
         }
 
         if (!isset($downloadCounts[$file])) {
@@ -41,7 +41,6 @@ if (isset($_GET['file'])) {
 
         file_put_contents($counterFile, json_encode($downloadCounts, JSON_PRETTY_PRINT));
 
-        // En-têtes pour forcer le téléchargement
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="' . $file . '"');

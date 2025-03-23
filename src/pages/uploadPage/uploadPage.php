@@ -5,9 +5,11 @@ require_once '../../components/commentaire/commentaire.php';
 require_once '../../components/partage/partage.php';
 obligationConnexion();
 
+
 $fichiers = recupererLesFichier($identifiantHasher);
 $comments = recupererLesCommentaires();
-
+$counterFile = '../../components/download/counter.json';
+$downloadCounts = file_exists($counterFile) ? json_decode(file_get_contents($counterFile), true) : [];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,11 +35,11 @@ $comments = recupererLesCommentaires();
         </form>
 
         <?php if ($sharedlink != '' && $public == 'public'): ?>
-            <a href="<?= $sharedlink ?>">Lien public</a>
+            <p>Lien public : <a href="<?= $sharedlink ?>"><?=$sharedlink ?></a></p>
         <?php endif; ?>
 
         <?php if ($sharedlink != '' && $public == 'reserved'): ?>
-            <a href="<?= $sharedlink ?>">Lien privé</a>
+            <p>Lien privé : <a href="<?= $sharedlink ?>"><?=$sharedlink ?></a></p>
         <?php endif; ?>
 
 
@@ -49,16 +51,17 @@ $comments = recupererLesCommentaires();
     </div>
     <div class="w-[100%] flex flex-col items-center">
         <h2 class="text-[4rem] text-purple-500 pt-[3rem]">Vos fichiers</h2>
-
+        
         <?php foreach ($fichiers as $fichier): ?>
             <form action="../../components/download/download.php" method="GET" class="bg-sky-500">
                 <label for="file"><?= $fichier ?></label>
                 <input type="hidden" name="file" value="<?= $fichier ?>">
-                <button type="submit">Télécharger</button>
+                <button type="submit" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1rem] px-3 py-1.5 text-center">Télécharger</button>
             </form>
+            <p>Nombre de téléchargements pour <?= $fichier ?> : <?= isset($downloadCounts[$fichier]) ? $downloadCounts[$fichier] : 0 ?></p>
             <form action="../../components/suppression/suppression.php" method="POST">
                 <input type="hidden" name="fichieraSupprimer" value="<?= $fichier ?>">
-                <button type="submit">Supprimer</button>
+                <button type="submit" class="w-fit text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-[1rem] px-3 py-1.5 text-center m-[1rem]">Supprimer</button>
             </form>
             <ul>
                 <li>

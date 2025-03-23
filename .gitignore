@@ -1,3 +1,4 @@
 *.json
 src/uploads/
+src/users/
 
